@@ -11,12 +11,30 @@ function add(taskName) {
 }
 
 /**
+* タスク名と完了したかどうかの真偽値が含まれるオブジェクトを受け取り、完了したかを返す
+* @param {object} task
+* @return {boolean} 完了したかどうか
+*/
+function isDone(task) {
+  return task.isDone;
+}
+
+/**
+* タスク名と完了したかどうかの真偽値が含まれるオブジェクトを受け取り、完了していないかを返す
+* @param {object} task
+* @return {boolean} 完了していないかどうか
+*/
+function isNotDone(task) {
+  return !isDone(task);
+}
+
+/**
  * タスクの一覧の配列を取得する
  * @returns {string[]}
  */
 function list() {
   return tasks
-    .filter(task => !task.isDone)
+    .filter(isNotDone)
     .map(task => task.name);
 }
 
@@ -37,7 +55,7 @@ function done(taskName) {
  */
 function donelist() {
   return tasks
-    .filter(task => task.isDone)
+    .filter(isDone)
     .map(task => task.name);
 }
 
